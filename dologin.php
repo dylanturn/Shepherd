@@ -14,11 +14,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         include("phpauth/Auth.php");
 
 
-        $dnHost = $_SERVER['MYSQL_HOST'];
-        $dbPort = $_SERVER['MYSQL_PORT'];
-        $dbName = $_SERVER['MYSQL_DATABASE'];
-        $username = $_SERVER['MYSQL_USER'];
-        $password = $_SERVER['MYSQL_PASSWORD'];
+        $dnHost = getenv('MYSQL_HOST');
+        $dbPort = getenv('MYSQL_PORT');
+        $dbName = getenv('MYSQL_DATABASE');
+        $username = getenv('MYSQL_USER');
+        $password = getenv('MYSQL_PASSWORD');
 
         #$dnHost='192.168.1.135';
         #$dbPort='32776';
