@@ -6,8 +6,6 @@ ENV MYSQL_DATABASE phpauth
 ENV MYSQL_USER shepherdadmin
 ENV MYSQL_PASSWORD defaultpassword
 
-# start servers
-ADD startServers.sh /usr/sbin/start-servers
 ENV START_APACHE true
 ENV ALLOW_INSECURE true
 ENV START_MYSQL false
