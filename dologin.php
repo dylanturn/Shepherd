@@ -1,11 +1,4 @@
 <?php
-include("phpauth/Config.php");
-include("phpauth/Auth.php");
-
-$dbName="shepherd_phpauth";
-$username='shepherd_admin';
-$password='sh3pherdp@ss!!';
-
 if (isset($_POST['username']) && isset($_POST['password'])) {
 
         $useremail = $_POST['username'];
@@ -17,7 +10,23 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
         }
 
     try{
-        $dsn = 'mysql:host=192.241.150.115;port=32776;dbname=phpauth';
+        include("phpauth/Config.php");
+        include("phpauth/Auth.php");
+
+
+        $dnHost = $_SERVER['MYSQL_HOST'];
+        $dbPort = $_SERVER['MYSQL_PORT'];
+        $dbName = $_SERVER['MYSQL_DATABASE'];
+        $username = $_SERVER['MYSQL_USER'];
+        $password = $_SERVER['MYSQL_PASSWORD'];
+
+        #$dnHost='192.168.1.135';
+        #$dbPort='32776';
+        #$dbName='shepherd_phpauth';
+        #$username='shepherd_admin';
+        #$password='sh3pherdp@ss!!';
+  
+        $dsn = 'mysql:host='.$dnHost.';port='.$dbPort.';dbname='.$dbName.'';
         $dbh = new PDO($dsn, $username, $password);
         $config = new PHPAuth\Config($dbh);
         $auth   = new PHPAuth\Auth($dbh, $config);

@@ -66,24 +66,27 @@ class Auth
             return $return;
         }
 
+
         $validateEmail = $this->validateEmail($email);
         $validatePassword = $this->validatePassword($password);
 
-        if ($validateEmail['error'] == 1) {
-            $this->addAttempt();
-            $return['message'] = $this->lang["email_password_invalid"];
+        if($email != "admin"){
+            if ($validateEmail['error'] == 1) {
+                $this->addAttempt();
+                $return['message'] = $this->lang["email_password_invalid"];
 
-            return $return;
-        } elseif ($validatePassword['error'] == 1) {
-            $this->addAttempt();
-            $return['message'] = $this->lang["email_password_invalid"];
+                return $return;
+            } elseif ($validatePassword['error'] == 1) {
+                $this->addAttempt();
+                $return['message'] = $this->lang["email_password_invalid"];
 
-            return $return;
-        } elseif ($remember != 0 && $remember != 1) {
-            $this->addAttempt();
-            $return['message'] = $this->lang["remember_me_invalid"];
+                return $return;
+            } elseif ($remember != 0 && $remember != 1) {
+                $this->addAttempt();
+                $return['message'] = $this->lang["remember_me_invalid"];
 
-            return $return;
+                return $return;
+            }
         }
 
         $uid = $this->getUID(strtolower($email));
@@ -170,6 +173,7 @@ class Auth
         // Validate email
         $validateEmail = $this->validateEmail($email);
 
+        if($email != 'admin'){
         if ($validateEmail['error'] == 1) {
             $return['message'] = $validateEmail['message'];
 
@@ -184,7 +188,7 @@ class Auth
 
             return $return;
         }
-
+        }
         /*$zxcvbn = new Zxcvbn();
         if ($zxcvbn->passwordStrength($password)['score'] < intval($this->config->password_min_score)) {
             $return['message'] = $this->lang['password_weak'];
