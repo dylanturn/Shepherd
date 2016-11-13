@@ -17,5 +17,10 @@ EXPOSE 80
 # for https (apache)
 EXPOSE 443
 
-ADD Shepherd/ /srv/http
+ADD ["images","/srv/http/"]
+ADD ["lib","/srv/http/"]
+ADD ["packages","/srv/http/"]
+ADD ["phpauth","/srv/http/"]
+ADD ["*.php","/srv/http/"]
+
 CMD sleep infinity
