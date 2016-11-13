@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 
 <?php
+try{
   include("phpauth/Config.php");
   include("phpauth/Auth.php");
 
@@ -9,6 +10,7 @@
   
   $dsn = 'mysql:host=192.241.150.115;port=32776;dbname=phpauth';
   $dbh = new PDO($dsn, $username, $password);
+
   $config = new PHPAuth\Config($dbh);
   $auth   = new PHPAuth\Auth($dbh, $config);
   $authResult = $auth->checkSession($_COOKIE["shepherd"]);
@@ -20,7 +22,9 @@
 
   $sessionUserID = $auth->getSessionUID($_COOKIE["shepherd"]);
   $sessionUser = $auth->getUser($sessionUserID);
-
+}catch(PDOException  $e ){
+        echo "DB Error!";
+    } 
 ?>
 
 <?php
