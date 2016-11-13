@@ -11,12 +11,6 @@ try{
   $dbName = getenv('MYSQL_DATABASE');
   $username = getenv('MYSQL_USER');
   $password = getenv('MYSQL_PASSWORD');
-
-  #$dnHost='192.168.1.135';
-  #$dbPort='32776';
-  #$dbName='shepherd_phpauth';
-  #$username='shepherd_admin';
-  #$password='sh3pherdp@ss!!';
   
   $dsn = 'mysql:host='.$dnHost.';port='.$dbPort.';dbname='.$dbName.'';
   $dbh = new PDO($dsn, $username, $password);
@@ -71,7 +65,7 @@ try{
 ?>
 
 <html>
-<title>Shepherd</title>
+<title>Shepherd v1</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="lib/w3.css">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
