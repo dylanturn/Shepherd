@@ -1,10 +1,10 @@
 FROM greyltc/lamp
 
-ENV MYSQL_HOST
-ENV MYSQL_PORT
-ENV MYSQL_DATABASE
-ENV MYSQL_USER
-ENV MYSQL_PASSWORD
+ENV MYSQL_HOST default_host
+ENV MYSQL_PORT 3306
+ENV MYSQL_DATABASE phpauth
+ENV MYSQL_USER shepherdadmin
+ENV MYSQL_PASSWORD defaultpassword
 
 # start servers
 ADD startServers.sh /usr/sbin/start-servers
