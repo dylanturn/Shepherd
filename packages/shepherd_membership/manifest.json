@@ -1,0 +1,10 @@
+{
+    "version": 1,
+    "position":2,
+    "tag": "membership",
+    "label": "Membership",
+    "path": "membership.php",
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval'"
+}
+
+
