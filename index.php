@@ -72,6 +72,38 @@ try{
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<?php 
+  putenv("CLUSTER_PRIMARY=http://localhost:5001");
+  $cluster_Primary = getenv('CLUSTER_PRIMARY');
+?>
+
+<script>
+  var intervalArrays = [];
+  var cluster_Primary = "<?php echo $cluster_Primary ?>"; 
+  var clusterXML = "<Cluster>empty</Cluster>";
+
+  $( document ).ready(function() {
+    $.get(
+      cluster_Primary + "/sdk", function(data) {
+      clusterXML = data;
+      x = clusterXML.getElementsByTagName("ClusterDetail")[0];
+      txt = x.getAttribute("name");
+      console.log('[index] page content: ' + txt);
+    });
+  });
+
+  setInterval(function(){
+    $.get(
+      cluster_Primary + "/sdk", function(data) {
+      clusterXML = data;
+      x = clusterXML.getElementsByTagName("ClusterDetail")[0];
+      txt = x.getAttribute("name");
+      console.log('[index] page content: ' + txt);
+    });
+  }, 1000);
+
+</script>
+
 <style>
   html,body,h1,h2,h3,h4,h5 {font-family: "Raleway", sans-serif}
   #settings:before {
@@ -172,6 +204,12 @@ try{
   });
 
   function changeView(newViewTag){
+    
+    // Stop view intervals that might be running.
+    for (i = 0; i < intervalArrays.length; i++) {
+      clearInterval(intervalArrays[i]);
+    }
+
     http = new XMLHttpRequest();
     if(newViewTag=="settings"){
       http.open("GET", "settings.php", true);
